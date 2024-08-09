@@ -1,0 +1,33 @@
+import MySQLdb
+
+try:
+    # 開啟資料庫連接
+    conn = MySQLdb.connect(host="localhost",     # 主機名稱
+                            user="root",         # 帳號
+                            password="9527", # 密碼
+                            database = "testdb", #資料庫
+                            port=3306)           # port
+    
+    # 使用cursor()方法操作資料庫
+    cursor = conn.cursor()
+    
+    # 建立表格towndata
+    sql = """CREATE TABLE IF NOT EXISTS towndata (year CHAR(4),
+                                                  site VARCHAR(20),
+                                                  people_total int(10),
+                                                  area float(10),
+                                                  population int(10))"""
+    cursor.execute(sql)
+    
+    print("資料表建立完畢")
+    
+    cursor.close()
+    conn.close()
+    
+except Exception as e :
+    print("資料庫連接失敗", e)
+    
+finally:
+    print("資料庫連線結束")
+    
+    
