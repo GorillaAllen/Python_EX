@@ -1,0 +1,38 @@
+import MySQLdb
+
+try:
+    # 開啟資料庫連接
+    conn = MySQLdb.connect(host="localhost",     # 主機名稱
+                           user="root",          # 帳號
+                           password="9527",  # 密碼
+                           database = "testdb",  # 資料庫
+                           port=3306,            # port
+                           charset="utf8")       # 資料庫編碼
+    
+    # 使用cursor()方法操作資料庫
+    cursor = conn.cursor()
+    
+    # 查詢表格towndata的指定縣市資料
+    key = input("請輸入要查詢的縣市名：")
+    
+    try:
+        cursor.execute("SELECT site,people_total FROM towndata WHERE site LIKE '%s'%(key+'%'))
+        data = cursor.fetchall()
+        
+        for i in data:
+            print(i)
+        print("%s一共有%d筆資料" %(key, len(data)))
+        
+        cursor.close()
+        conn.close()
+       
+    except Exception as e:
+        print("錯誤訊息：", e)
+ 
+except Exception as e:
+    print("資料庫連接失敗：", e)
+    
+finally:
+    print("資料庫連線結束")
+    
+    
