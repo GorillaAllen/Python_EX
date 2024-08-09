@@ -1,0 +1,38 @@
+import pandas as pd
+
+filePath = "111年各鄉鎮市區人口密度.csv"
+# data_csv1 = pd.read_csv( filePath, header=1 )
+data_csv1 = pd.read_csv(filePath, header = 1, usecols = [0,1,2,3,4] )
+
+# print(data_csv1.info(),"--------------\n", data_csv1.head())
+
+# print(data_csv1[["區域別","年底人口數"]][0:370])#直接用[]的方法,用於先取得欄位名,再指定row.不包尾
+
+# print(data_csv1.loc[0:369:1, "區域別":"年底人口數"])#用loc[]的方法,用於先取row,再取欄位名. 包尾
+
+data_csv1.insert(5,column="備註", value=[ i for i in range(374) ],) #insert()方法可以修改原資料
+
+# x = data_csv1.drop("備註", axis = 1) #drop()方法需要指定給新的變數
+
+# print(data_csv1)
+# print(x)
+
+numbers_annual = data_csv1["年底人口數"]
+# print(numbers_annual)
+
+lstNAstr = list(numbers_annual)
+# print(type(int(lstNAstr[1])))
+lstNAint = list()
+
+for i in range(367):
+    lstNAint.append(int(lstNAstr[i]))#取出"年底人口數"這個list的值(str)轉int放進另一個list
+    
+data_csv1.drop("年底人口數", axis =1)
+# data_csv1.insert(2,"年底人口數",lstNAint)
+print(data_csv1)
+    
+# print(lstNAint)
+
+
+# m = data_csv1.sort_values("年底人口數")
+# print(m)
