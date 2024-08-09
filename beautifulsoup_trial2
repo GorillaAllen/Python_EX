@@ -1,0 +1,12 @@
+from bs4 import BeautifulSoup
+import requests
+
+url = "https://www.gear4music.com/electric-guitars/manson?_gl=1*fcqdon*_up*MQ..*_ga*MjU1Nzc3MzUwLjE3MjEwMjkyNjU.*_ga_0WF1R5QW3K*MTcyMTAyOTI2NC4xLjEuMTcyMTAyOTI3NS4wLjAuMTQyMDk5NjY3Nw.."
+
+web = requests.get(url)
+soup = BeautifulSoup(web.text,"lxml")
+
+# print(soup.title.text)
+
+tag_number = soup.find_all("div", class_ = "product-card-title")
+
