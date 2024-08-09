@@ -1,0 +1,18 @@
+from bs4 import BeautifulSoup
+
+url = "Example.html"
+
+with open(url, encoding = "utf8") as file:
+    soup = BeautifulSoup(file, "lxml")
+    
+# tag_p = soup.find("p")
+# print(tag_p)
+# print("-"*30)
+
+# tag_div3 = soup.find("div", class_="emails")
+# print(tag_div3)
+
+tag_li_list = soup.find_all("li")
+
+for row in tag_li_list:
+    print(row.text)
